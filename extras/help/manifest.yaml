@@ -1,0 +1,6 @@
+name: Help
+description: Show PiKVM help information
+icon: share/svg/info.svg
+path: help
+daemon: kvmd
+place: 22
