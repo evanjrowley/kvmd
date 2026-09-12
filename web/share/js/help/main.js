@@ -35,7 +35,7 @@ function __showHelpText() {
 	let origin = window.location.protocol + "//" + window.location.host;
 	$("help-text").textContent = [
 		"# Verify KVMD API:",
-		`$ curl -k ${origin}/api/info`,
+		`$ curl ${origin}/api/info`,
 		"",
 		"# Open PiKVM docs:",
 		"$ xdg-open https://docs.pikvm.org",
