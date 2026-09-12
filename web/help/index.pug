@@ -1,0 +1,17 @@
+extends ../start.pug
+
+
+append vars
+	-
+		root_prefix = "../"
+		title = "PiKVM Help"
+		main_js = "help/main"
+		index_link = true
+
+
+block start
+	p.text
+		| This page provides quick links and checks for your PiKVM instance.
+	p.text
+		| Use the commands below to verify connectivity and open documentation.
+	pre.code#help-text(style="max-height:200px")
