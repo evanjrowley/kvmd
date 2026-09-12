@@ -23,43 +23,24 @@
 "use strict";
 
 
-import {$, tools} from "../tools.js";
+import {$} from "../tools.js";
 
 
 export function main() {
-	__loadKvmdInfo();
+	__showHelpText();
 }
 
-function __loadKvmdInfo() {
-	tools.httpGet("api/info", {"legacy": 0}, function(http) {
-		switch (http.status) {
-			case 200:
-				__showKvmdInfo(JSON.parse(http.responseText).result);
-				break;
-
-			case 401:
-			case 403:
-				tools.currentOpen("login");
-				break;
-
-			default:
-				setTimeout(__loadKvmdInfo, 1000);
-				break;
-		}
-	});
-}
-
-function __showKvmdInfo(info) {
-	let host = tools.escape((info.node || {}).host || window.location.hostname);
-	let origin = tools.escape(window.location.protocol + "//" + window.location.host);
-	$("help-text").innerHTML = `
-		<span class="code-comment"># Verify KVMD API:</span><br>
-		<span class="code-comment">$</span> curl -k ${origin}/api/info<br>
-		<br>
-		<span class="code-comment"># Open PiKVM docs:</span><br>
-		<span class="code-comment">$</span> xdg-open https://docs.pikvm.org<br>
-		<br>
-		<span class="code-comment"># Current PiKVM host:</span><br>
-		${host}
-	`;
+function __showHelpText() {
+	let host = window.location.hostname;
+	let origin = window.location.protocol + "//" + window.location.host;
+	$("help-text").textContent = [
+		"# Verify KVMD API:",
+		`$ curl -k ${origin}/api/info`,
+		"",
+		"# Open PiKVM docs:",
+		"$ xdg-open https://docs.pikvm.org",
+		"",
+		"# Current PiKVM host:",
+		host,
+	].join("\n");
 }
